@@ -4,35 +4,22 @@ const path = require("path");
 const chalk = require('chalk');
 const ora = require('ora');
 
-const RPC_URL = 'https://base-sepolia-rpc.publicnode.com/89e4ff0f587fe2a94c7a2c12653f4c55d2bda1186cb6c1c95bd8d8408fbdc014';
-const CHAIN_ID = 84532;
+const {
+  PRIOR_ADDRESS,
+  ROUTER_ADDRESS,
+  ERC20_ABI,
+  SWAP_FUNCTION_SELECTORS,
+  delay,
+  amount,
+  amountInWei,
+  provider,
+  spinner
+} = require('./skw/config');
 
-const PRIOR_ADDRESS = '0xc19Ec2EEBB009b2422514C51F9118026f1cD89ba';
-const ROUTER_ADDRESS = '0x0f1DADEcc263eB79AE3e4db0d57c49a8b6178B0B';
-
-const ERC20_ABI = [
-  "function approve(address spender, uint256 amount) external returns (bool)",
-  "function balanceOf(address account) external view returns (uint256)",
-  "function allowance(address owner, address spender) external view returns (uint256)"
-];
-
-const SWAP_FUNCTION_SELECTORS = {
-  USDT: '0x03b530a3',
-  USDC: '0xf3b68002'
-};
-
-const amount = '0.01';
-const amountInWei = ethers.parseUnits(amount, 18);
-
-const provider = new ethers.JsonRpcProvider(RPC_URL);
 const privateKeys = fs.readFileSync(path.join(__dirname, "privatekey.txt"), "utf-8")
   .split("\n")
   .map(key => key.trim())
   .filter(key => key.length > 0);
-
-const spinner = ora({
-  color: "cyan",
-});
 
 async function claimFaucet(wallet) {
   try {
@@ -51,7 +38,6 @@ async function claimFaucet(wallet) {
     spinner.succeed(chalk.hex('#66CDAA')(` Claim successful! TxHash: ${tx.hash}`));
   } catch (err) {
     spinner.fail(` Claim Gagal Belum 24 Jam`);
-    spinner.stop();
   }
 }
 
@@ -111,18 +97,28 @@ async function swapPrior(wallet, tokenType) {
 
 async function main() {
   console.clear();
+
   for (const privateKey of privateKeys) {
     const wallet = new ethers.Wallet(privateKey, provider);
     console.log(chalk.hex('#7B68EE')(`🔑 Processing wallet: ${wallet.address}`));
 
     await claimFaucet(wallet);
 
-    console.log(chalk.hex('#7B68EE')(`⏳ Memproses Swap PIOR to USDT`));
-    await swapPrior(wallet, 'USDT');
+    console.log(chalk.hex('#7B68EE')(`⏳ Memproses 20x Swap PRIOR to USDT`));
+    for (let i = 1; i <= 20; i++) {
+      console.log(chalk.hex('#ADD8E6')(`🔁 Swap ke ${i}`));
+      await swapPrior(wallet, 'USDT');
+      console.log();
+      await delay(1000);
+    }
 
-    console.log(chalk.hex('#7B68EE')(`⏳ Memproses Swap PIOR to USDC`));
-    await swapPrior(wallet, 'USDC');
-
+    console.log(chalk.hex('#7B68EE')(`⏳ Memproses 20x Swap PRIOR to USDC`));
+    for (let i = 1; i <= 20; i++) {
+      console.log(chalk.hex('#ADD8E6')(`🔁 Swap ke ${i}`));
+      await swapPrior(wallet, 'USDC');
+      console.log();
+      await delay(1000);
+    }
   }
 }
 
