@@ -26,7 +26,7 @@ async function claimFaucet(wallet) {
     const faucetAddress = '0xCa602D9E45E1Ed25105Ee43643ea936B8e2Fd6B7';
     const claimSelector = '0x48c54b9d';
 
-    spinner.start(chalk.hex('#20B2AA')(` Claiming faucet for ${wallet.address}...`));
+    spinner.start(chalk.hex('#20B2AA')(` Claim PRIOR faucet `));
 
     const tx = await wallet.sendTransaction({
       to: faucetAddress,
@@ -37,7 +37,7 @@ async function claimFaucet(wallet) {
     await tx.wait();
     spinner.succeed(chalk.hex('#66CDAA')(` Claim successful! TxHash: ${tx.hash}`));
   } catch (err) {
-    spinner.fail(` Claim Gagal Belum 24 Jam`);
+    spinner.fail(chalk.hex('#FF8C00')(` Claim Faucet Gagal Belum 24 Jam\n`));
   }
 }
 
@@ -67,7 +67,6 @@ async function swapPrior(wallet, tokenType) {
   const priorContract = new ethers.Contract(PRIOR_ADDRESS, ERC20_ABI, wallet);
 
   try {
-    spinner.start(chalk.hex('#20B2AA')(` Swap ${amount} PRIOR ke ${tokenType}...`));
     const approved = await approvePrior(wallet, priorContract, amountInWei);
     if (!approved) {
       return false;
@@ -78,6 +77,7 @@ async function swapPrior(wallet, tokenType) {
     const encodedAmount = ethers.AbiCoder.defaultAbiCoder().encode(['uint256'], [amountInWei]);
     const txData = selector + encodedAmount.slice(2);
 
+    spinner.start(chalk.hex('#20B2AA')(` Swap ${amount} PRIOR ke ${tokenType}...`));
     const tx = await wallet.sendTransaction({
       to: ROUTER_ADDRESS,
       data: txData,
@@ -100,11 +100,11 @@ async function main() {
 
   for (const privateKey of privateKeys) {
     const wallet = new ethers.Wallet(privateKey, provider);
-    console.log(chalk.hex('#7B68EE')(`🔑 Processing wallet: ${wallet.address}`));
+    console.log(chalk.hex('#7B68EE')(`🔑 Memproses wallet: ${wallet.address}`));
 
     await claimFaucet(wallet);
 
-    console.log(chalk.hex('#7B68EE')(`⏳ Memproses 20x Swap PRIOR to USDT`));
+    console.log(chalk.hex('#7B68EE')(`⏳ Memproses 20x Swap ${amount} PRIOR to USDT`));
     for (let i = 1; i <= 20; i++) {
       console.log(chalk.hex('#ADD8E6')(`🔁 Swap ke ${i}`));
       await swapPrior(wallet, 'USDT');
