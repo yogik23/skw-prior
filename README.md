@@ -24,7 +24,7 @@
     ```
     nano privatekey.txt
     ```
-   format privatekey.txt
+   format privatekey.txt gunakan privatekey 0x
     ```
     privateKey1
     privateKey2
