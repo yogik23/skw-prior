@@ -21,6 +21,7 @@ function displayskw() {
   console.log(chalk.hex('#00CED1')(" ║ ➤   Sudah Pasti Elig                                         ║"));
   console.log(chalk.hex('#00CED1')(" ╚══════════════════════════════════════════════════════════════╝"));
   console.log(chalk.hex('#00CED1')("   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"));
+  console.log();
 }
 
 module.exports = { displayskw };
