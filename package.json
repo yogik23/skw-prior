@@ -1,0 +1,19 @@
+{
+  "name": "prior",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ethers": "^6.13.5",
+    "chalk": "^3.0.0",
+    "ora": "^5.0.0"
+  }
+}
