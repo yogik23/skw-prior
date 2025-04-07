@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require('chalk');
 const ora = require('ora');
+const { displayskw } = require('./skw/displayskw');
 
 const {
   PRIOR_ADDRESS,
@@ -97,7 +98,8 @@ async function swapPrior(wallet, tokenType) {
 
 async function main() {
   console.clear();
-
+  displayskw();
+  
   for (const privateKey of privateKeys) {
     const wallet = new ethers.Wallet(privateKey, provider);
     console.log(chalk.hex('#7B68EE')(`🔑 Memproses wallet: ${wallet.address}`));
