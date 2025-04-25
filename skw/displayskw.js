@@ -14,9 +14,10 @@ function displayskw() {
   console.log(chalk.hex('#00CED1')(" ╔══════════════════════════════════════════════════════════════╗"));
   console.log(chalk.hex('#00CED1')(" ║ ≣  Fitur Autobot by SKW AIRDROP HUNTER                       ║"));
   console.log(chalk.hex('#00CED1')(" ║══════════════════════════════════════════════════════════════║"));
-  console.log(chalk.hex('#00CED1')(" ║ ➤   Auto claim Faucet PRIOR                                  ║"));
-  console.log(chalk.hex('#00CED1')(" ║ ➤   Auto Swap PRIOR to USDT 20x                              ║"));
-  console.log(chalk.hex('#00CED1')(" ║ ➤   Auto Swap PRIOR to USDC 20x                              ║"));
+  console.log(chalk.hex('#00CED1')(" ║ ➤   Auto SWAP USDC-R2USD                                     ║"));
+  console.log(chalk.hex('#00CED1')(" ║ ➤   Auto STAKE R2USD                                         ║"));
+  console.log(chalk.hex('#00CED1')(" ║ ➤   Auto Add LP R2USD-sR2USD                                 ║"));
+  console.log(chalk.hex('#00CED1')(" ║ ➤   Auto Deposit BTC                                         ║"));
   console.log(chalk.hex('#00CED1')(" ║ ➤   Multi Akun                                               ║"));
   console.log(chalk.hex('#00CED1')(" ║ ➤   Sudah Pasti Elig                                         ║"));
   console.log(chalk.hex('#00CED1')(" ╚══════════════════════════════════════════════════════════════╝"));
