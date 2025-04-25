@@ -5,8 +5,10 @@
 ### [Link Testnet](https://testnetpriorprotocol.xyz/)
 
 ## Fitur Autobot
-- Auto claim Faucet PRIOR
-- Auto Swap 20x
+- Auto SWAP USDC-R2USD
+- Auto STAKE R2USD
+- Auto Add LP R2USD-sR2USD
+- Auto Deposit BTC
 - Multi Akun
 - Sudah Pasti Eligible
 
